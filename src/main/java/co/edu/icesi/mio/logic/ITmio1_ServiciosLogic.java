@@ -14,6 +14,6 @@ public interface ITmio1_ServiciosLogic {
 	public void createServicio(Tmio1Servicio servicio)throws ServiciosLogicException;
 	public void deleteServicio(Tmio1Servicio servicio)throws ServiciosLogicException;
 	public void updateServicio(Tmio1Servicio servicio)throws ServiciosLogicException;
-	public List<Tmio1Servicio> findServicioByRangeOfDates(EntityManager em, Calendar fechaInicio, Calendar fechaFin)
+	public List<Tmio1Servicio> findServicioByRangeOfDates(EntityManager em, Calendar fechaInicio, Calendar fechaFin);
 }
 

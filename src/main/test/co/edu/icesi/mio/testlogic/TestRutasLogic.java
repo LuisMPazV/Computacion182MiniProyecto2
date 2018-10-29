@@ -1,5 +1,8 @@
 package co.edu.icesi.mio.testlogic;
 
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -16,4 +19,41 @@ public class TestRutasLogic {
 	
 	@Autowired
 	private ITmio1_RutasLogic tMioRutasLogic;
+	
+	
+	@Test
+	private void test1() {
+		assertNotNull(tMioRutasLogic);
+		
+		
+	}
+	
+	
+	@Test
+	private void test2() {
+		assertNotNull(tMioRutasLogic);
+		
+	}
+	
+	
+	@Test
+	private void test3() {
+		assertNotNull(tMioRutasLogic);
+		
+	}
+	
+	
+	@Test
+	private void test4() {
+		assertNotNull(tMioRutasLogic);
+		
+	}
+	
+	
+	@Test
+	private void test5() {
+		assertNotNull(tMioRutasLogic);
+		
+	}
+	
 }

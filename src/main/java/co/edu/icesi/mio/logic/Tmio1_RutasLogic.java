@@ -63,7 +63,7 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 			}
 		}else if(ruta.getHoraInicio().compareTo(ruta.getHoraFin())>0) {
 			throw new RutasLogicException(RutasLogicException.HORA_INICIO_MAYOR_FIN);
-		}else if(!ruta.getActiva().equals("S")||!ruta.getActiva().equals("N")) {
+		}else if(!(ruta.getActiva().equals("S")||ruta.getActiva().equals("N"))) {
 			throw new RutasLogicException(RutasLogicException.ACTIVA_NO_VALIDO);
 		}else {
 			tMioRutasDao.save(entityManager, ruta);
@@ -110,7 +110,7 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 			}
 		}else if(ruta.getHoraInicio().compareTo(ruta.getHoraFin())>0) {
 			throw new RutasLogicException(RutasLogicException.HORA_INICIO_MAYOR_FIN);
-		}else if(!ruta.getActiva().equals("S")||!ruta.getActiva().equals("N")) {
+		}else if(!(ruta.getActiva().equals("S")||ruta.getActiva().equals("N"))) {
 			throw new RutasLogicException(RutasLogicException.ACTIVA_NO_VALIDO);
 		}else {
 			tMioRutasDao.delete(entityManager, ruta);
@@ -155,7 +155,7 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 			}
 		}else if(ruta.getHoraInicio().compareTo(ruta.getHoraFin())>0) {
 			throw new RutasLogicException(RutasLogicException.HORA_INICIO_MAYOR_FIN);
-		}else if(!ruta.getActiva().equals("S")||!ruta.getActiva().equals("N")) {
+		}else if(!(ruta.getActiva().equals("S")||ruta.getActiva().equals("N"))) {
 			throw new RutasLogicException(RutasLogicException.ACTIVA_NO_VALIDO);
 		}else {
 			tMioRutasDao.update(entityManager, ruta);

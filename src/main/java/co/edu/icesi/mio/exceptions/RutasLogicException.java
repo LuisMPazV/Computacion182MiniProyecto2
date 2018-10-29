@@ -23,4 +23,10 @@ public class RutasLogicException extends Exception{
 		super();
 		this.msg=msg;
 	}
+
+	public String getMsg() {
+		return msg;
+	}
+	
+	
 }

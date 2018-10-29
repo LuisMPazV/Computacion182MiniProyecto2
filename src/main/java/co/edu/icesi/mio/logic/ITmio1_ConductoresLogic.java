@@ -7,6 +7,7 @@ import co.edu.icesi.mio.model.Tmio1Conductore;
 
 public interface ITmio1_ConductoresLogic {
 	
+	
 	public void createConductor(Tmio1Conductore conductor)throws ConductoresLogicException;
 	public void deleteConductor(Tmio1Conductore conductor)throws ConductoresLogicException;
 	public void updateConductor(Tmio1Conductore conductor)throws ConductoresLogicException;

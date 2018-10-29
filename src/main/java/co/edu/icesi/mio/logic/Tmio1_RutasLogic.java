@@ -10,7 +10,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.edu.icesi.mio.dao.Tmio1_Rutas_DAO;
+import co.edu.icesi.mio.dao.ITmio1_Rutas_DAO;
+
 import co.edu.icesi.mio.exceptions.RutasLogicException;
 import co.edu.icesi.mio.model.Tmio1Ruta;
 
@@ -19,7 +20,7 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 
 	
 	@Autowired
-	Tmio1_Rutas_DAO tMioRutasDao;
+	private ITmio1_Rutas_DAO tMioRutasDao;
 	
 	@PersistenceContext
 	private EntityManager entityManager;

@@ -1,19 +1,19 @@
 package co.edu.icesi.mio.logic;
 
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.List;
-import java.util.GregorianCalendar;
+
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.mio.dao.ITmio1_Conductores_DAO;
 import co.edu.icesi.mio.dao.Tmio1_Conductores_DAO;
 import co.edu.icesi.mio.exceptions.ConductoresLogicException;
 import co.edu.icesi.mio.model.Tmio1Conductore;
@@ -22,7 +22,7 @@ import co.edu.icesi.mio.model.Tmio1Conductore;
 public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 
 	@Autowired
-	Tmio1_Conductores_DAO tMioConductoresDao;
+	private ITmio1_Conductores_DAO tMioConductoresDao;
 	
 	@PersistenceContext
 	private EntityManager entityManager;

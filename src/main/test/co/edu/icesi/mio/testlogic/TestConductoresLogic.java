@@ -22,7 +22,7 @@ public class TestConductoresLogic {
 	
 
 	@Test
-	private void test1() {
+	private void testCedulaNumerica() {
 		assertNotNull(tMioConductoresLogic);
 		
 		

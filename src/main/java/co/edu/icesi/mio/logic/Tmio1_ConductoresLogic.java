@@ -33,7 +33,11 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 		if(conductor==null) {
 			throw new ConductoresLogicException(ConductoresLogicException.CONDUCTOR_NO_DEFINIDO);
 		}else if(conductor.getCedula()==null||conductor.getCedula().isEmpty()) {
-			//TODO falta validar que la cedula sea solo de numeros
+			try {
+				Integer.parseInt(conductor.getCedula());
+			} catch (Exception e) {
+				throw new ConductoresLogicException(ConductoresLogicException.CEDULA_NO_NUMERICA);
+			}
 		}else if(conductor.getNombre()==null||(conductor.getNombre().isEmpty()||conductor.getNombre().length()<3)) {
 			if(conductor.getNombre()==null) {
 				throw new ConductoresLogicException(ConductoresLogicException.NOMBRE_NO_DEFINIDO);

@@ -146,14 +146,14 @@ public class TestBusesLogic {
 	public void testModeloNumericoY4Digitos() {
 		assertNotNull(tMioBusesLogic);
 		escenario3();
-		//Intento de registro placa no valida
+		//Intento de registro modleo no valido
 		try {
 			tMioBusesLogic.createBus(bus);
 			fail("Se agrego un bus con modelo numerico no definido");
 		} catch (Exception e) {
 			assertEquals(BusesLogicException.NO_MODELO_NUMERICO, e.getMessage());
 		}
-		//Intento d eregistro placa con numero de caracteres diferente de 6
+		//Intento d eregistro modelo con numero de caracteres diferente de 4
 		try {
 			tMioBusesLogic.createBus(bus2);
 			fail("Se agrego un bus con modelo con numero de digitos diferente de 4");
@@ -167,14 +167,14 @@ public class TestBusesLogic {
 	public void testTipoPAT() {
 		assertNotNull(tMioBusesLogic);
 		escenario4();
-		//Intento de registro placa no valida
+		//Intento de registro Tipo no definido
 		try {
 			tMioBusesLogic.createBus(bus);
 			fail("Se agrego un bus con tipo no definido");
 		} catch (Exception e) {
 			assertEquals(BusesLogicException.TIPO_NO_DEFINIDA, e.getMessage());
 		}
-		//Intento d eregistro placa con numero de caracteres diferente de 6
+		//Intento d eregistro placa con tipo no valido
 		try {
 			tMioBusesLogic.createBus(bus2);
 			fail("Se agrego un bus con tipo no valido");
@@ -188,14 +188,14 @@ public class TestBusesLogic {
 	public void testCapacidadNumericaYMayorA0() {
 		assertNotNull(tMioBusesLogic);
 		escenario5();
-		//Intento de registro placa no valida
+		//Intento de registro capacidad no valida
 		try {
 			tMioBusesLogic.createBus(bus);
 			fail("Se agrego un bus con capacidad numerica no definida");
 		} catch (Exception e) {
 			assertEquals(BusesLogicException.CAPACIDAD_NO_DEFINIDA, e.getMessage());
 		}
-		//Intento d eregistro placa con numero de caracteres diferente de 6
+		//Intento d eregistro placa con capacidad menor que 0
 		try {
 			tMioBusesLogic.createBus(bus2);
 			fail("Se agrego un bus con capacidad no valida");

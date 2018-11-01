@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.ITmio1_Conductores_DAO;
-import co.edu.icesi.mio.dao.Tmio1_Conductores_DAO;
 import co.edu.icesi.mio.exceptions.ConductoresLogicException;
 import co.edu.icesi.mio.model.Tmio1Conductore;
 
@@ -28,17 +27,13 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 	private EntityManager entityManager;
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = ConductoresLogicException.class)
 	public void createConductor(Tmio1Conductore conductor) throws ConductoresLogicException {
 		if(conductor==null) {
 			throw new ConductoresLogicException(ConductoresLogicException.CONDUCTOR_NO_DEFINIDO);
 		}else if(conductor.getCedula()==null||conductor.getCedula().isEmpty()) {
-			try {
-				Integer.parseInt(conductor.getCedula());
-			} catch (Exception e) {
-				throw new ConductoresLogicException(ConductoresLogicException.CEDULA_NO_NUMERICA);
-			}
-		}else if(conductor.getNombre()==null||(conductor.getNombre().isEmpty()||conductor.getNombre().length()<3)) {
+			throw new ConductoresLogicException(ConductoresLogicException.CEDULA_NO_DEFINIDO);
+		}else if(conductor.getNombre()==null||conductor.getNombre().isEmpty()||conductor.getNombre().length()<3) {
 			if(conductor.getNombre()==null) {
 				throw new ConductoresLogicException(ConductoresLogicException.NOMBRE_NO_DEFINIDO);
 			}else {
@@ -63,18 +58,23 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 				throw new ConductoresLogicException(ConductoresLogicException.FECHA_CONTRATACION_INVALIDA);
 			}
 		}else {
+			try {
+				Integer.parseInt(conductor.getCedula());
+			} catch (Exception e) {
+				throw new ConductoresLogicException(ConductoresLogicException.CEDULA_NO_NUMERICA);
+			}
 			tMioConductoresDao.save(entityManager, conductor);
 		}
 		
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = ConductoresLogicException.class)
 	public void deleteConductor(Tmio1Conductore conductor) throws ConductoresLogicException {
 		if(conductor==null) {
 			throw new ConductoresLogicException(ConductoresLogicException.CONDUCTOR_NO_DEFINIDO);
 		}else if(conductor.getCedula()==null||conductor.getCedula().isEmpty()) {
-			//TODO falta validar que la cedula sea solo de numeros
+			throw new ConductoresLogicException(ConductoresLogicException.CEDULA_NO_DEFINIDO);
 		}else if(conductor.getNombre()==null||(conductor.getNombre().isEmpty()||conductor.getNombre().length()<3)) {
 			if(conductor.getNombre()==null) {
 				throw new ConductoresLogicException(ConductoresLogicException.NOMBRE_NO_DEFINIDO);
@@ -100,18 +100,23 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 				throw new ConductoresLogicException(ConductoresLogicException.FECHA_CONTRATACION_INVALIDA);
 			}
 		}else {
+			try {
+				Integer.parseInt(conductor.getCedula());
+			} catch (Exception e) {
+				throw new ConductoresLogicException(ConductoresLogicException.CEDULA_NO_NUMERICA);
+			}
 			tMioConductoresDao.delete(entityManager, conductor);
 		}
 		
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = ConductoresLogicException.class)
 	public void updateConductor(Tmio1Conductore conductor) throws ConductoresLogicException {
 		if(conductor==null) {
 			throw new ConductoresLogicException(ConductoresLogicException.CONDUCTOR_NO_DEFINIDO);
 		}else if(conductor.getCedula()==null||conductor.getCedula().isEmpty()) {
-			//TODO falta validar que la cedula sea solo de numeros
+			throw new ConductoresLogicException(ConductoresLogicException.CEDULA_NO_DEFINIDO);
 		}else if(conductor.getNombre()==null||(conductor.getNombre().isEmpty()||conductor.getNombre().length()<3)) {
 			if(conductor.getNombre()==null) {
 				throw new ConductoresLogicException(ConductoresLogicException.NOMBRE_NO_DEFINIDO);
@@ -137,13 +142,18 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 				throw new ConductoresLogicException(ConductoresLogicException.FECHA_CONTRATACION_INVALIDA);
 			}
 		}else {
+			try {
+				Integer.parseInt(conductor.getCedula());
+			} catch (Exception e) {
+				throw new ConductoresLogicException(ConductoresLogicException.CEDULA_NO_NUMERICA);
+			}
 			tMioConductoresDao.update(entityManager, conductor);
 		}
 		
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = ConductoresLogicException.class)
 	public Tmio1Conductore findConductorByCedula(String cedula) throws ConductoresLogicException {
 		if(cedula==null||cedula.isEmpty()) {
 			
@@ -168,7 +178,7 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = ConductoresLogicException.class)
 	public List<Tmio1Conductore> findConductorByNombre(String nombre) throws ConductoresLogicException {
 		if(nombre==null||(nombre.isEmpty()||nombre.length()<3)) {
 			if(nombre==null) {
@@ -182,7 +192,7 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = ConductoresLogicException.class)
 	public List<Tmio1Conductore> findConductorByApellido(String apellido) throws ConductoresLogicException {
 		if(apellido==null||(apellido.isEmpty()||apellido.length()<3)) {
 			if(apellido==null) {

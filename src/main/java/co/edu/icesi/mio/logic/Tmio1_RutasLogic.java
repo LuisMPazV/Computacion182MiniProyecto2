@@ -9,9 +9,9 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.ITmio1_Rutas_DAO;
-
 import co.edu.icesi.mio.exceptions.RutasLogicException;
 import co.edu.icesi.mio.model.Tmio1Ruta;
 
@@ -26,6 +26,7 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 	private EntityManager entityManager;
 	
 	@Override
+	@Transactional(rollbackFor = RutasLogicException.class)
 	public void createRuta(Tmio1Ruta ruta) throws RutasLogicException {
 		if(ruta==null) {
 			throw new RutasLogicException(RutasLogicException.RUTA_NO_DEFINIDA);
@@ -73,6 +74,7 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 	}
 
 	@Override
+	@Transactional(rollbackFor = RutasLogicException.class)
 	public void deleteRuta(Tmio1Ruta ruta) throws RutasLogicException {
 		if(ruta==null) {
 			throw new RutasLogicException(RutasLogicException.RUTA_NO_DEFINIDA);
@@ -118,6 +120,7 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 	}
 
 	@Override
+	@Transactional(rollbackFor = RutasLogicException.class)
 	public void updateRuta(Tmio1Ruta ruta) throws RutasLogicException {
 		if(ruta==null) {
 			throw new RutasLogicException(RutasLogicException.RUTA_NO_DEFINIDA);
@@ -163,6 +166,7 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 	}
 
 	@Override
+	@Transactional(rollbackFor = RutasLogicException.class)
 	public List<Tmio1Ruta> getRutasByRangeDays(BigDecimal begin, BigDecimal end) throws RutasLogicException {
 		if(begin==null||begin.compareTo(BigDecimal.valueOf(1))<0||begin.compareTo(BigDecimal.valueOf(7))>0) {
 			if(begin==null) {

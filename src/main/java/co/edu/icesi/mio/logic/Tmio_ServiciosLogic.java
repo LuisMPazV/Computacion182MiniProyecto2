@@ -8,11 +8,13 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.ITmio1_Buses_DAO;
 import co.edu.icesi.mio.dao.ITmio1_Conductores_DAO;
 import co.edu.icesi.mio.dao.ITmio1_Rutas_DAO;
 import co.edu.icesi.mio.dao.ITmio1_Servicios_DAO;
+import co.edu.icesi.mio.exceptions.BusesLogicException;
 import co.edu.icesi.mio.exceptions.ServiciosLogicException;
 import co.edu.icesi.mio.model.Tmio1Servicio;
 
@@ -35,6 +37,7 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 	private EntityManager entityManager;
 
 	@Override
+	@Transactional(rollbackFor = ServiciosLogicException.class)
 	public void createServicio(Tmio1Servicio servicio) throws ServiciosLogicException {
 		if (servicio == null) {
 			throw new ServiciosLogicException(ServiciosLogicException.NO_SERVICIO);
@@ -81,6 +84,7 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 	}
 
 	@Override
+	@Transactional(rollbackFor = ServiciosLogicException.class)
 	public void deleteServicio(Tmio1Servicio servicio) throws ServiciosLogicException {
 		if (servicio == null) {
 			throw new ServiciosLogicException(ServiciosLogicException.NO_SERVICIO);
@@ -126,6 +130,7 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 	}
 
 	@Override
+	@Transactional(rollbackFor = ServiciosLogicException.class)
 	public void updateServicio(Tmio1Servicio servicio) throws ServiciosLogicException {
 		if (servicio == null) {
 			throw new ServiciosLogicException(ServiciosLogicException.NO_SERVICIO);
@@ -171,6 +176,7 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 	}
 
 	@Override
+	@Transactional(rollbackFor = ServiciosLogicException.class)
 	public List<Tmio1Servicio> findServicioByRangeOfDates(EntityManager em, Calendar fechaInicio, Calendar fechaFin) throws ServiciosLogicException{
 		if (fechaInicio == null || fechaFin == null || fechaInicio.compareTo(fechaFin) > 0) {
 			if (fechaInicio == null) {

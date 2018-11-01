@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.icesi.mio.dao.ITmio1_Buses_DAO;
 import co.edu.icesi.mio.dao.Tmio1_Buses_DAO;
 import co.edu.icesi.mio.exceptions.BusesLogicException;
+import co.edu.icesi.mio.exceptions.RutasLogicException;
 import co.edu.icesi.mio.model.Tmio1Bus;
 
 @Service
@@ -26,7 +27,7 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 	private EntityManager entityManager;
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = BusesLogicException.class)
 	public void createBus(Tmio1Bus bus) throws BusesLogicException {
 		if(bus==null) {
 			throw new BusesLogicException(BusesLogicException.BUS_NO_DEFINIDO);
@@ -67,7 +68,7 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = BusesLogicException.class)
 	public void deleteBus(Tmio1Bus bus) throws BusesLogicException {
 		if(bus==null) {
 			throw new BusesLogicException(BusesLogicException.BUS_NO_DEFINIDO);
@@ -108,7 +109,7 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = BusesLogicException.class)
 	public void updateBus(Tmio1Bus bus) throws BusesLogicException {
 		if(bus==null) {
 			throw new BusesLogicException(BusesLogicException.BUS_NO_DEFINIDO);
@@ -148,7 +149,7 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = BusesLogicException.class)
 	public List<Tmio1Bus> findBusByModelo(BigDecimal modelo) throws BusesLogicException {
 		if(modelo==null||modelo.toString().length()!=4) {
 			if(modelo==null) {
@@ -162,7 +163,7 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = BusesLogicException.class)
 	public List<Tmio1Bus> findBusByTipo(String tipo) throws BusesLogicException {
 		if(tipo==null||!tipo.equals("P")||!tipo.equals("A")||!tipo.equals("T")) {
 			if(tipo==null) {
@@ -176,7 +177,7 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = BusesLogicException.class)
 	public List<Tmio1Bus> findBusByCapacidad(BigDecimal capacidad) throws BusesLogicException {
 		if(capacidad==null||capacidad.compareTo(BigDecimal.valueOf(0))<=0) {
 			if(capacidad==null) {

@@ -16,11 +16,9 @@ public class ConductoresLogicException extends Exception{
 	public static final String FECHA_CONTRATACION_INVALIDA="La fecha de contratacion es mayor a la fecha actual";
 	
 	
-	private String msg;
 	
 	public ConductoresLogicException(String msg) {
-		super();
-		this.msg=msg;
+		super(msg);
 	}
 
 }

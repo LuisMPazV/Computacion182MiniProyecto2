@@ -74,7 +74,7 @@ public class Tmio1_Conductores_DAO implements ITmio1_Conductores_DAO{
 	//normales
 	@Override
 	public void save(EntityManager em, Tmio1Conductore conductor) {
-		em.persist(conductor);		
+		em.persist(conductor);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class Tmio1_Conductores_DAO implements ITmio1_Conductores_DAO{
 
 	@Override
 	public void delete(EntityManager em, Tmio1Conductore conductor) {
-		em.remove(conductor);	
+		em.remove(em.contains(conductor) ? conductor : em.merge(conductor));	
 	}
 
 	@Override

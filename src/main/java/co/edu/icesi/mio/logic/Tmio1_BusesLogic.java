@@ -47,9 +47,15 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 			if(bus.getModelo()==null) {
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_NUMERICO);
 			}else {
+				try {
+					Integer.parseInt(bus.getModelo().toString());
+				} catch (Exception e) {
+					throw new BusesLogicException(BusesLogicException.NO_MODELO_NUMERICO);
+				}
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_CUATRO_CARACTERES);
 			}
-		}else if(bus.getTipo()==null||!bus.getTipo().equals("P")||!bus.getTipo().equals("A")||!bus.getTipo().equals("T")) {
+		}else if(bus.getTipo()==null||!(bus.getTipo().equals("P")||bus.getTipo().equals("A")||bus.getTipo().equals("T"))) {
+			System.out.println("----------------->" + bus.getTipo());
 			if(bus.getTipo()==null) {
 				throw new BusesLogicException(BusesLogicException.TIPO_NO_DEFINIDA);
 			}else {
@@ -88,6 +94,11 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 			if(bus.getModelo()==null) {
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_NUMERICO);
 			}else {
+				try {
+					Integer.parseInt(bus.getModelo().toString());
+				} catch (Exception e) {
+					throw new BusesLogicException(BusesLogicException.NO_MODELO_NUMERICO);
+				}
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_CUATRO_CARACTERES);
 			}
 		}else if(bus.getTipo()==null||!bus.getTipo().equals("P")||!bus.getTipo().equals("A")||!bus.getTipo().equals("T")) {
@@ -129,6 +140,11 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 			if(bus.getModelo()==null) {
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_NUMERICO);
 			}else {
+				try {
+					Integer.parseInt(bus.getModelo().toString());
+				} catch (Exception e) {
+					throw new BusesLogicException(BusesLogicException.NO_MODELO_NUMERICO);
+				}
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_CUATRO_CARACTERES);
 			}
 		}else if(bus.getTipo()==null||!bus.getTipo().equals("P")||!bus.getTipo().equals("A")||!bus.getTipo().equals("T")) {

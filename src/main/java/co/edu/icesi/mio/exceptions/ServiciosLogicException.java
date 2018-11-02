@@ -14,6 +14,8 @@ public class ServiciosLogicException extends Exception{
 	public static final String NO_FECHA_INICIO="La fecha de inicio no esta definida.";
 	public static final String NO_FECHA_FIN="La fecha de fin no esta definida.";
 	public static final String FECHA_INICIO_MAYOR_FECHA_FIN="La fecha de inicio es mayor a la fecha de fin.";
+	public static final String BUS_OCUPADO="El bus designado para el servicio ya esta ocupado en las fechas que se prentende dar el servicio.";
+	public static final String CONDUCTOR_OCUPADO="El conductor designado para el servicio ya esta ocupado en las fechas que se prentende dar el servicio.";
 	
 	public ServiciosLogicException(String msg) {
 		super(msg);

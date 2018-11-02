@@ -1,6 +1,7 @@
 package co.edu.icesi.mio.logic;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,7 +15,6 @@ import co.edu.icesi.mio.dao.ITmio1_Buses_DAO;
 import co.edu.icesi.mio.dao.ITmio1_Conductores_DAO;
 import co.edu.icesi.mio.dao.ITmio1_Rutas_DAO;
 import co.edu.icesi.mio.dao.ITmio1_Servicios_DAO;
-import co.edu.icesi.mio.exceptions.BusesLogicException;
 import co.edu.icesi.mio.exceptions.ServiciosLogicException;
 import co.edu.icesi.mio.model.Tmio1Servicio;
 
@@ -44,6 +44,7 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 		} else if (servicio.getTmio1Bus() == null || servicio.getTmio1Bus().getId() == null
 				|| tMioBusesDao.findById(entityManager, servicio.getTmio1Bus().getId()) == null) {
 			if (servicio.getTmio1Bus() == null) {
+				System.out.println("hola");
 				throw new ServiciosLogicException(ServiciosLogicException.NO_LLAVE_FORANEA_BUS);
 			} else {
 				throw new ServiciosLogicException(ServiciosLogicException.NO_EXISTE_LLAVE_FORANEA_BUS);
@@ -75,14 +76,16 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 			} else {
 				throw new ServiciosLogicException(ServiciosLogicException.FECHA_INICIO_MAYOR_FECHA_FIN);
 			}
+		} else if (!busLibre(servicio)){
+			throw new ServiciosLogicException(ServiciosLogicException.BUS_OCUPADO);
+		} else if (!conductorLibre(servicio)){
+			throw new ServiciosLogicException(ServiciosLogicException.CONDUCTOR_OCUPADO);
 		} else {
-			// TODO falta validar que el bus se encuentre disponible y que no tenga
-			// asignados otros servicios en esas fechas
 			tMioServiciosDao.save(entityManager, servicio);
 		}
 
 	}
-
+	
 	@Override
 	@Transactional(rollbackFor = ServiciosLogicException.class)
 	public void deleteServicio(Tmio1Servicio servicio) throws ServiciosLogicException {
@@ -122,9 +125,11 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 			} else {
 				throw new ServiciosLogicException(ServiciosLogicException.FECHA_INICIO_MAYOR_FECHA_FIN);
 			}
+		} else if (!busLibre(servicio)){
+			throw new ServiciosLogicException(ServiciosLogicException.BUS_OCUPADO);
+		} else if (!conductorLibre(servicio)){
+			throw new ServiciosLogicException(ServiciosLogicException.CONDUCTOR_OCUPADO);
 		} else {
-			// TODO falta validar que el bus se encuentre disponible y que no tenga
-			// asignados otros servicios en esas fechas
 			tMioServiciosDao.delete(entityManager, servicio);
 		}
 	}
@@ -168,16 +173,18 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 			} else {
 				throw new ServiciosLogicException(ServiciosLogicException.FECHA_INICIO_MAYOR_FECHA_FIN);
 			}
+		} else if (!busLibre(servicio)){
+			throw new ServiciosLogicException(ServiciosLogicException.BUS_OCUPADO);
+		} else if (!conductorLibre(servicio)){
+			throw new ServiciosLogicException(ServiciosLogicException.CONDUCTOR_OCUPADO);
 		} else {
-			// TODO falta validar que el bus se encuentre disponible y que no tenga
-			// asignados otros servicios en esas fechas
 			tMioServiciosDao.update(entityManager, servicio);
 		}
 	}
 
 	@Override
 	@Transactional(rollbackFor = ServiciosLogicException.class)
-	public List<Tmio1Servicio> findServicioByRangeOfDates(EntityManager em, Calendar fechaInicio, Calendar fechaFin) throws ServiciosLogicException{
+	public List<Tmio1Servicio> findServicioByRangeOfDates(Calendar fechaInicio, Calendar fechaFin) throws ServiciosLogicException{
 		if (fechaInicio == null || fechaFin == null || fechaInicio.compareTo(fechaFin) > 0) {
 			if (fechaInicio == null) {
 				throw new ServiciosLogicException(ServiciosLogicException.NO_FECHA_INICIO);
@@ -190,4 +197,39 @@ public class Tmio_ServiciosLogic implements ITmio1_ServiciosLogic {
 			return tMioServiciosDao.findByRangeOfDates(entityManager, fechaInicio, fechaFin);
 		}
 	}
+	
+	public boolean busLibre(Tmio1Servicio servicio) {
+		
+		Calendar fechaInicio = new GregorianCalendar(servicio.getId().getFechaInicio().getYear(), servicio.getId().getFechaInicio().getMonth(),servicio.getId().getFechaInicio().getDay());
+		Calendar fechaFin = new GregorianCalendar(servicio.getId().getFechaFin().getYear(), servicio.getId().getFechaFin().getMonth(),servicio.getId().getFechaFin().getDay());
+		try {
+			List<Tmio1Servicio> servicios = tMioServiciosDao.findByCollitionDates(entityManager, fechaInicio, fechaFin);
+			for (Tmio1Servicio s : servicios) {
+				if (!s.getId().equals(servicio.getId()) && s.getTmio1Bus().getId() == servicio.getTmio1Bus().getId()) {
+					return false;
+				}
+			}
+			return true;
+		} catch (Exception e) {
+		}
+		return false;
+	}
+	
+	public boolean conductorLibre(Tmio1Servicio servicio) {
+		
+		Calendar fechaInicio = new GregorianCalendar(servicio.getId().getFechaInicio().getYear(), servicio.getId().getFechaInicio().getMonth(),servicio.getId().getFechaInicio().getDay());
+		Calendar fechaFin = new GregorianCalendar(servicio.getId().getFechaFin().getYear(), servicio.getId().getFechaFin().getMonth(),servicio.getId().getFechaFin().getDay());
+		try {
+			List<Tmio1Servicio> servicios = tMioServiciosDao.findByCollitionDates(entityManager, fechaInicio, fechaFin);
+			for (Tmio1Servicio s : servicios) {
+				if (!s.getId().equals(servicio.getId()) && s.getTmio1Conductore().getCedula() == servicio.getTmio1Conductore().getCedula()) {
+					return false;
+				}
+			}
+			return true;
+		} catch (Exception e) {
+		}
+		return false;
+	}
+	
 }

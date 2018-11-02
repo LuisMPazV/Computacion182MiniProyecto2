@@ -101,7 +101,7 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 				}
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_CUATRO_CARACTERES);
 			}
-		}else if(bus.getTipo()==null||!bus.getTipo().equals("P")||!bus.getTipo().equals("A")||!bus.getTipo().equals("T")) {
+		}else if(bus.getTipo()==null||!(bus.getTipo().equals("P")||bus.getTipo().equals("A")||bus.getTipo().equals("T"))) {
 			if(bus.getTipo()==null) {
 				throw new BusesLogicException(BusesLogicException.TIPO_NO_DEFINIDA);
 			}else {
@@ -147,7 +147,7 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 				}
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_CUATRO_CARACTERES);
 			}
-		}else if(bus.getTipo()==null||!bus.getTipo().equals("P")||!bus.getTipo().equals("A")||!bus.getTipo().equals("T")) {
+		}else if(bus.getTipo()==null||!(bus.getTipo().equals("P")||bus.getTipo().equals("A")||bus.getTipo().equals("T"))) {
 			if(bus.getTipo()==null) {
 				throw new BusesLogicException(BusesLogicException.TIPO_NO_DEFINIDA);
 			}else {

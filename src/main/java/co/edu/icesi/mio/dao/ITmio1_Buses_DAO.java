@@ -17,6 +17,7 @@ public interface ITmio1_Buses_DAO {
 	public Tmio1Bus findById(EntityManager em, Integer id);
 			
 	//adicionales
+	public Tmio1Bus findByPlaca(EntityManager em, String placa);
 	public List<Tmio1Bus> findByModel(EntityManager em, BigDecimal model);
 	public List<Tmio1Bus> findByType(EntityManager em, String type);
 	public List<Tmio1Bus> findByCapacity(EntityManager em, BigDecimal capacity);

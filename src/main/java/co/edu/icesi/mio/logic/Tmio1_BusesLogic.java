@@ -55,7 +55,6 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 				throw new BusesLogicException(BusesLogicException.NO_MODELO_CUATRO_CARACTERES);
 			}
 		}else if(bus.getTipo()==null||!(bus.getTipo().equals("P")||bus.getTipo().equals("A")||bus.getTipo().equals("T"))) {
-			System.out.println("----------------->" + bus.getTipo());
 			if(bus.getTipo()==null) {
 				throw new BusesLogicException(BusesLogicException.TIPO_NO_DEFINIDA);
 			}else {
@@ -113,6 +112,8 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 			}else {
 				throw new BusesLogicException(BusesLogicException.CAPACIDAD_NO_VALIDA);
 			}
+		}else if(tMioBusesDao.findByPlaca(entityManager, bus.getPlaca())==null) {
+			throw new BusesLogicException(BusesLogicException.BUS_NO_BORRAR);
 		}else {
 			tMioBusesDao.delete(entityManager, bus);
 		}
@@ -159,6 +160,8 @@ public class Tmio1_BusesLogic implements ITmio1_BusesLogic{
 			}else {
 				throw new BusesLogicException(BusesLogicException.CAPACIDAD_NO_VALIDA);
 			}
+		}else if(tMioBusesDao.findByPlaca(entityManager, bus.getPlaca())==null) {
+			throw new BusesLogicException(BusesLogicException.BUS_NO_SE_PUEDE_ACTUALIZAR);
 		}else {
 			tMioBusesDao.update(entityManager, bus);
 		}

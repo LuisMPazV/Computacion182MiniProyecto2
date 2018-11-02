@@ -116,7 +116,8 @@ public class TestServiciosLogic {
 			tMioRutasLogic.createRuta(ruta2);
 			
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("->>>>>>>>"+e.getMessage());
+			e.printStackTrace();
 		}
 		
 	}
@@ -132,6 +133,7 @@ public class TestServiciosLogic {
 			tMioRutasLogic.deleteRuta(ruta);
 			tMioRutasLogic.deleteRuta(ruta2);
 		} catch (Exception e) {
+			System.out.println("----------------->aaaaaa");
 			System.out.println(e.getMessage());
 		}
 	}
@@ -255,11 +257,13 @@ public class TestServiciosLogic {
 	@Test
 	public void testInsertarValido() {
 		assertNotNull(tMioServiciosLogic);
+		System.out.println("------------------> 1");
 		variables();
 		escenario1();
 		try {
 			tMioServiciosLogic.createServicio(servicio);
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail("No se pudo agregar el servicio");
 		}
 		try {
@@ -274,6 +278,7 @@ public class TestServiciosLogic {
 	public void testLlavesExisten() {
 		assertNotNull(tMioServiciosLogic);
 		//Intento de registro sin llave bus
+		System.out.println("------------------> 2");
 		variables();
 		escenario2();
 		try {
@@ -296,7 +301,7 @@ public class TestServiciosLogic {
 	@Test
 	public void testFechaExisteYMenorQueFinal() {
 		assertNotNull(tMioServiciosLogic);
-		
+		System.out.println("------------------> 3");
 		variables();
 		escenario3();
 		

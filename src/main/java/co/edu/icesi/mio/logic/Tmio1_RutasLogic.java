@@ -160,6 +160,8 @@ public class Tmio1_RutasLogic implements ITmio1_RutasLogic{
 			throw new RutasLogicException(RutasLogicException.HORA_INICIO_MAYOR_FIN);
 		}else if(!(ruta.getActiva().equals("S")||ruta.getActiva().equals("N"))) {
 			throw new RutasLogicException(RutasLogicException.ACTIVA_NO_VALIDO);
+		}else if(tMioRutasDao.findById(entityManager, ruta.getId())==null) {
+			throw new RutasLogicException(RutasLogicException.RUTA_NO_SE_PUEDE_ACTUALIZAR);
 		}else {
 			tMioRutasDao.update(entityManager, ruta);
 		}

@@ -99,6 +99,8 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 			}else {
 				throw new ConductoresLogicException(ConductoresLogicException.FECHA_CONTRATACION_INVALIDA);
 			}
+		}else if(tMioConductoresDao.findByCedula(entityManager, conductor.getCedula())==null) {
+			throw new ConductoresLogicException(ConductoresLogicException.CONDUCTOR_NO_SE_PUEDE_ACTUALIZAR);
 		}else {
 			try {
 				Integer.parseInt(conductor.getCedula());
@@ -141,6 +143,8 @@ public class Tmio1_ConductoresLogic implements ITmio1_ConductoresLogic{
 			}else {
 				throw new ConductoresLogicException(ConductoresLogicException.FECHA_CONTRATACION_INVALIDA);
 			}
+		}else if(tMioConductoresDao.findByCedula(entityManager, conductor.getCedula())==null) {
+			throw new ConductoresLogicException(ConductoresLogicException.CONDUCTOR_NO_SE_PUEDE_ACTUALIZAR);
 		}else {
 			try {
 				Integer.parseInt(conductor.getCedula());

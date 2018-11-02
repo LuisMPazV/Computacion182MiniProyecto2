@@ -15,6 +15,9 @@ public class BusesLogicException extends Exception{
 	public static final String TIPO_NO_VALIDO="El tipo de bus no es valido.";
 	public static final String CAPACIDAD_NO_VALIDA="La capacidad del bus no es valida(Mayor a 0).";
 	
+	public static final String BUS_NO_SE_PUEDE_ACTUALIZAR="El bus no se puede actualizar por que no existe.";
+	public static final String BUS_NO_BORRAR = "El bus no puede borrar por que no existe.";
+	
 	public BusesLogicException(String msg) {
 		super(msg);
 	}

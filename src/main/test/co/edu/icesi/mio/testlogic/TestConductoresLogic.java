@@ -107,7 +107,6 @@ public class TestConductoresLogic {
 		try {
 			tMioConductoresLogic.deleteConductor(conductor2);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		//Intento de cedula numerica
 		try {

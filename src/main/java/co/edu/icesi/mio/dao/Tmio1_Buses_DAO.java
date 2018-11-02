@@ -61,4 +61,10 @@ public class Tmio1_Buses_DAO implements ITmio1_Buses_DAO{
 		return em.find(Tmio1Bus.class, id);
 	}
 
+	@Override
+	public Tmio1Bus findByPlaca(EntityManager em, String placa) {
+		String jpql = "Select b from Tmio1Bus b where b.placa= '"+  placa + "'";
+		return 	(Tmio1Bus)em.createQuery(jpql).getSingleResult();
+	}
+
 }

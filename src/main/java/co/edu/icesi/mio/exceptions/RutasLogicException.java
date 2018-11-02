@@ -17,6 +17,8 @@ public class RutasLogicException extends Exception{
 	public static final String HORA_INICIO_MAYOR_FIN="La hora de inicio es mayor a la hora de fin.";
 	public static final String ACTIVA_NO_VALIDO="El estado de actividad no es valido.";
 	public static final String RUTA_NO_DEFINIDA="La ruta no esta definida.";
+	
+	public static final String RUTA_NO_SE_PUEDE_ACTUALIZAR="La ruta no se puede actualizar por que no existe.";
 	private String msg;
 	
 	public RutasLogicException(String msg) {

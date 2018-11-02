@@ -14,6 +14,8 @@ public class ConductoresLogicException extends Exception{
 	public static final String NO_MAYOR_DE_EDAD="El conductor no es mayor de edad";
 	public static final String FECHA_CONTRATACION_NO_DEFINIDA="La fecha de contratacion no esta definida";
 	public static final String FECHA_CONTRATACION_INVALIDA="La fecha de contratacion es mayor a la fecha actual";
+	public static final String CONDUCTOR_NO_SE_PUEDE_ACTUALIZAR="El conductor no se puede actualizar por que no existe";
+	
 	
 	
 	

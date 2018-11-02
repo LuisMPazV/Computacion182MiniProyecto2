@@ -240,7 +240,7 @@ public class TestRutasLogic {
 		assertNotNull(tMioRutasLogic);
 		contextRutaValida();
 		try {
-			tMioRutasLogic.updateRuta(ruta);
+			tMioRutasLogic.createRuta(ruta);
 		} catch (RutasLogicException e) {
 			System.out.println(e.getMsg());
 			fail();

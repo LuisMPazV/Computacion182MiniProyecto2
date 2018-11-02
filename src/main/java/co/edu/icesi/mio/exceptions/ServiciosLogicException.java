@@ -17,6 +17,10 @@ public class ServiciosLogicException extends Exception{
 	public static final String BUS_OCUPADO="El bus designado para el servicio ya esta ocupado en las fechas que se prentende dar el servicio.";
 	public static final String CONDUCTOR_OCUPADO="El conductor designado para el servicio ya esta ocupado en las fechas que se prentende dar el servicio.";
 	
+	public static final String CONDUCTOR_NO_PUEDE_SER_ACTUALIZADO="El servicio no puede ser actualizado por que no existe.";
+	
+	
+	
 	public ServiciosLogicException(String msg) {
 		super(msg);
 	}
